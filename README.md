@@ -1,155 +1,75 @@
+[update-readmes]   Mode: rewrite — migrating to template structure...
 # buildkite-sdk
 
-[![Build status](https://badge.buildkite.com/a95a3beece2339d1783a0a819f4ceb323c1eb12fb9662be274.svg?branch=main)](https://buildkite.com/buildkite/buildkite-sdk)
+[![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/buildkite-sdk)
 
-A multi-language SDK for [Buildkite](https://buildkite.com)! 🪁
+<!-- AI:start:what-it-does -->
+_Description pending._
+<!-- AI:end:what-it-does -->
 
-Consumes the [Buildkite pipeline schema](https://github.com/buildkite/pipeline-schema) and generates and publishes packages for TypeScript or JavaScript, Python, Go, and Ruby.
+## Architecture
 
-## Installing and using the SDKs
+<!-- AI:start:architecture -->
+_Architecture documentation pending._
+<!-- AI:end:architecture -->
 
-Learn more about how to set up the Buildkite SDK for each langauge, and use it to work with your Buildkite pipelines, from the [Buildkite SDK](http://buildkite.com/docs/pipelines/configure/dynamic-pipelines/sdk) page of the Buildkite Docs.
+## Install
 
-## Upgrading to v0.4.0
-
-In v0.4.0 we introduced type generation from Buildkite's [Pipeline Schema](https://github.com/buildkite/pipeline-schema). You can find a list of breaking changes [here](./docs/v0.0.4-breaking-changes.md).
-
-## Development
-
-### Prerequisites
-
-To work on the SDK, you'll need current versions of the following tools:
-
--   [Node.js](https://nodejs.org/en/download), [Python](https://www.python.org/downloads/), [Go](https://go.dev/doc/install), [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
--   For Python: [uv](https://docs.astral.sh/uv/), [Black](https://black.readthedocs.io/en/stable/)
--   For Ruby: [Bundler](https://bundler.io/)
-
-See `mise.toml` for details. (We also recommend [Mise](https://mise.jdx.dev/) for tool-version management.) If you're on a Mac, and you use [Homebrew](https://brew.sh/), you can run `brew bundle` and `mise install` to get all you need:
+<!-- Add installation instructions here. This section is yours — the AI will not modify it. -->
 
 ```bash
-brew bundle
-mise install
+git clone https://github.com/Interested-Deving-1896/buildkite-sdk.git
+cd buildkite-sdk
 ```
 
-If you hit any rough edges during development, please file an issue. Thanks!
+## Usage
 
-### Useful commands
+<!-- Add usage examples here. This section is yours — the AI will not modify it. -->
 
-```bash
-# Install all project dependencies.
-npm install
+## Configuration
 
-# Test all SDKs and apps.
-npm test
+<!-- Document configuration options here. This section is yours — the AI will not modify it. -->
 
-# Build all SDKs (and write them to ./dist/sdks).
-npm run build
+## CI
 
-# Build all SDK docs (and write them to ./dist/docs).
-npm run docs
+<!-- AI:start:ci -->
+_CI documentation pending._
+<!-- AI:end:ci -->
 
-# Serve the docs locally (which builds them implicitly).
-npm run docs:serve
+## Mirror chain
 
-# Run all apps (which writes JSON and YAML pipelines to ./out).
-npm run apps
+<!-- AI:start:mirror-chain -->
+This repo is maintained in [`Interested-Deving-1896/buildkite-sdk`](https://github.com/Interested-Deving-1896/buildkite-sdk) and mirrored through:
 
-# Watch all projects for changes (which rebuilds the docs and SDKs and re-runs all apps).
-npm run watch
-
-# Launch web servers for all docsets and watch all projects for changes. (Requires reload.)
-npm run dev
-
-# Format all SDK code.
-npm run format
-
-# Publish to npm, PyPi pkg.go.dev, and RubyGems.
-npm run publish
-
-# Publish the docs to AWS.
-npm run docs:publish
-
-# Clear away build and test artifacts.
-npm run clean
+```
+Interested-Deving-1896/buildkite-sdk  ──►  OpenOS-Project-OSP/buildkite-sdk  ──►  OpenOS-Project-Ecosystem-OOC/buildkite-sdk
 ```
 
-### Regenerating types after a schema change
+Changes flow downstream automatically via the hourly mirror chain in
+[`fork-sync-all`](https://github.com/Interested-Deving-1896/fork-sync-all).
+Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-Deving-1896`.
+<!-- AI:end:mirror-chain -->
 
-This SDK generates types from the [Buildkite pipeline schema](https://github.com/buildkite/pipeline-schema). When changes are made to the pipeline-schema repository, you can regenerate the types by running:
+## Contributors
 
-```bash
-# Regenerate the types for all languages.
-npm run types
+<!-- AI:start:contributors -->
+_Contributors pending._
+<!-- AI:end:contributors -->
 
-# Regenerate the types for a specific language.
-npm run types-ts
-npm run types-py
-npm run types-go
-```
+## Origins
 
-The type generator automatically fetches the latest schema from the `main` branch of the pipeline-schema repository. Generated types are then written to:
+<!-- AI:start:origins -->
+_Original project — no upstream fork._
+<!-- AI:end:origins -->
 
--   `sdk/typescript/src/types/`
--   `sdk/python/src/buildkite_sdk/schema.py`
--   `sdk/go/sdk/buildkite/`
+## Resources
 
-Note that the type-generator binary (a Go program at `internal/gen/type-gen`) is automatically built when you run `npm run types`. If you need to rebuild that binary manually, run `npx nx gen:build`.
+<!-- AI:start:resources -->
+_No additional resource files found._
+<!-- AI:end:resources -->
 
-### Upgrading nx
+## License
 
-We manage this repository with [Nx](https://nx.dev/). To upgrade the Nx workspace to the latest version, use `nx migrate`. From the root of the project, run:
-
-```bash
-npx nx migrate latest
-```
-
-See the [nx guide](https://nx.dev/features/automate-updating-dependencies) for details.
-
-## Publishing new versions
-
-All SDKs version on the same cadence. To publish a new version (of all SDKs), follow these steps:
-
-1.  Commit all pending changes. We want the release commit to be "clean" (i.e., to consist only of changes related to the release itself.)
-
-1.  Update the `VERSION_FROM` and `VERSION_TO` values in the `release:all` task in [`./project.json`](./project.json).
-
-1.  Leaving that single change uncommitted and run the release script:
-
-    ```bash
-    npm run release:create-branch
-    ```
-
-    This script:
-
-    -   Updates the version numbers in all affected files
-    -   Rebuilds all SDKs
-    -   Commits all changes (e.g., to version files, lockfiles, and anything else under `./sdk`)
-    -   Pushes the branch to GitHub
-
-1. Next open a PR with the created branch.
-
-1. After the PR is merged, from an up-to-date main branch, create and push the release tags:
-
-    ```bash
-    git tag v{VERSION_TO} main
-    git tag sdk/go/v{VERSION_TO} main
-
-    git push origin v{VERSION_TO}
-    git push origin sdk/go/v{VERSION_TO}
-    ```
-
-1. Once the tags have been created, manually trigger the SDK Release Pipeline in Buildkite. After the pipeline has finished, manually create a release in GitHub ([example](https://github.com/buildkite/buildkite-sdk/releases/tag/v0.5.0)).
-
-### Docs
-
-The SDK language docs are managed by a Pulumi Program in `infra` and manually deployed after every release.
-
-### Required environment variables
-
-The following environment variables are required for releasing and publishing:
-
--   `NPM_TOKEN` for publishing to npm (with `npm publish`)
--   `PYPI_TOKEN` fror publishing to PyPI (with `uv publish`)
--   `GEM_HOST_API_KEY` for publishing to RubyGems (with `gem push`)
-
-See the `publish:all` tasks in `./project.json` for details.
+<!-- AI:start:license -->
+[MIT](https://github.com/Interested-Deving-1896/buildkite-sdk/blob/main/LICENSE) © 2026 [Interested-Deving-1896](https://github.com/Interested-Deving-1896)
+<!-- AI:end:license -->
